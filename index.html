@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>English Quests</title>
+<meta name="description" content="Trò chơi ôn tập tiếng Anh theo từng Unit. Mỗi lượt chơi 30 phút, có báo cáo lỗi sai và gợi ý chiến lược học tập.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout concept: a gilded program card. One hero, then three game cards in a row, then a short how-it-works strip. */
+:root{
+  color-scheme:dark;
+  --bg:#150b27; --bg-2:#1d1036; --panel:#26164a; --panel-2:#311d5e; --line:#4b3585;
+  --ink:#f5efff; --ink-2:#c4b5e8; --ink-3:#9a8bc4;
+  --amethyst:#a07bff; --gold:#f2d28b; --gold-deep:#c8a04a; --on-gold:#2b1750;
+  --font-display:'Fraunces',Georgia,'Times New Roman',serif;
+  --font-body:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{
+  margin:0;background-color:var(--bg);
+  background-image:radial-gradient(1000px 520px at 50% -10%,#37225f 0%,transparent 62%);
+  background-repeat:no-repeat;color:var(--ink);
+  font:400 16px/1.6 var(--font-body);
+  padding-inline:20px;padding-block:28px 56px;min-height:100vh;
+}
+h1,h2,h3,p,ul{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.wrap{max-width:1040px;margin-inline:auto;display:flex;flex-direction:column;gap:40px}
+.eyebrow{font:800 .76rem/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+
+.hero{display:flex;flex-direction:column;gap:16px;padding-block:28px 4px;max-width:720px}
+.hero h1{font:700 clamp(2.5rem,8vw,4.4rem)/1.02 var(--font-display);letter-spacing:-.02em;text-wrap:balance}
+.hero h1 em{font-style:italic;font-weight:500;color:var(--gold)}
+.hero p{color:var(--ink-2);font-size:1.08rem;max-width:58ch}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.fact{background:var(--panel);border-radius:999px;padding:.4rem 1rem;font-weight:800;font-size:.88rem;color:var(--ink-2)}
+.fact b{color:var(--gold);font-variant-numeric:tabular-nums}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:18px;align-items:stretch}
+.card{
+  position:relative;display:flex;flex-direction:column;gap:14px;min-width:0;
+  background:var(--panel);border-radius:22px;padding:26px 22px 22px;
+  box-shadow:inset 0 0 0 6px var(--panel),inset 0 0 0 7px var(--gold-deep);
+  transition:transform .18s,background .18s;
+}
+.card:hover{transform:translateY(-4px);background:#2c1953}
+.unit{display:flex;align-items:baseline;gap:10px}
+.unit b{font:700 3.4rem/1 var(--font-display);color:var(--gold);letter-spacing:-.03em}
+.unit span{font:800 .76rem/1.2 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.card h2{font:700 1.7rem/1.1 var(--font-display)}
+.titles{font-weight:700;color:var(--ink-2);font-size:.95rem}
+.card ul{list-style:none;padding:0;display:grid;gap:6px;color:var(--ink-2);font-size:.94rem}
+.card li{padding-left:18px;position:relative}
+.card li::before{content:'';position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--gold-deep)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:6px}
+.meta span{background:var(--panel-2);border-radius:999px;padding:.2rem .75rem;font-size:.8rem;font-weight:800;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.play{
+  display:inline-flex;justify-content:center;align-items:center;gap:8px;text-decoration:none;
+  background:var(--gold);color:var(--on-gold);font-weight:800;font-size:1.02rem;
+  border-radius:999px;padding:.85rem 1.4rem;transition:background .15s,transform .12s;
+}
+.play:hover{background:#f8dfa3}
+.play:active{transform:scale(.97)}
+.card.alt .play{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--line)}
+.card.alt .play:hover{box-shadow:inset 0 0 0 2px var(--amethyst);background:transparent}
+
+.how{background:var(--bg-2);border-radius:22px;padding:26px 22px;display:flex;flex-direction:column;gap:18px}
+.how h2{font:700 1.6rem/1.15 var(--font-display)}
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:16px}
+.steps li{display:flex;flex-direction:column;gap:6px;min-width:0}
+.steps b{font:800 .8rem/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.steps span{color:var(--ink-2);font-size:.96rem}
+.note{color:var(--ink-3);font-size:.9rem}
+footer{color:var(--ink-3);font-size:.85rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Ôn tập tiếng Anh theo từng Unit</p>
+    <h1>English <em>Quests</em></h1>
+    <p>Mỗi trò chơi gồm 8 level với nhiều dạng bài: nghe, chọn đáp án, sắp xếp câu, gõ chính tả. Làm xong, học viên nhận báo cáo chỉ ra lỗi sai ở đâu và kế hoạch học 5 ngày cho riêng mình.</p>
+    <div class="facts">
+      <span class="fact"><b>30</b> phút mỗi lượt</span>
+      <span class="fact">Giọng đọc <b>Anh-Anh</b></span>
+      <span class="fact">Chơi trên điện thoại và máy tính</span>
+    </div>
+  </header>
+
+  <main class="grid" aria-label="Danh sách trò chơi">
+    <article class="card">
+      <div class="unit"><b>1–2</b><span>Unit</span></div>
+      <h2>Passport Quest</h2>
+      <p class="titles">My friends · Time and daily routines</p>
+      <ul>
+        <li>Các quốc gia, Where are you from?</li>
+        <li>Where's he / she from?</li>
+        <li>Đọc giờ, What time do you…?</li>
+        <li>Hoạt động hằng ngày, phát âm a, ia, t, d</li>
+      </ul>
+      <div class="meta"><span>8 level</span><span>48 câu</span><span>30 phút</span></div>
+      <a class="play" href="unit-1-2.html">Chơi ngay</a>
+    </article>
+
+    <article class="card">
+      <div class="unit"><b>3–4</b><span>Unit</span></div>
+      <h2>Calendar Quest</h2>
+      <p class="titles">My week · My birthday party</p>
+      <ul>
+        <li>Các ngày trong tuần, What day is it today?</li>
+        <li>What do you do on…?</li>
+        <li>Các tháng, When's your birthday?</li>
+        <li>Đồ ăn, đồ uống, phát âm u, j, w</li>
+      </ul>
+      <div class="meta"><span>8 level</span><span>48 câu</span><span>30 phút</span></div>
+      <a class="play" href="unit-3-4.html">Chơi ngay</a>
+    </article>
+
+    <article class="card alt">
+      <div class="unit"><b>4</b><span>Unit</span></div>
+      <h2>Birthday Party Quest</h2>
+      <p class="titles">My birthday party · bản ôn riêng</p>
+      <ul>
+        <li>Các tháng, When's your birthday?</li>
+        <li>What are you doing? và lời chúc</li>
+        <li>What do you want to eat / drink?</li>
+        <li>Đọc hiểu thư và thiệp mời</li>
+      </ul>
+      <div class="meta"><span>7 level</span><span>49 câu</span><span>30 phút</span></div>
+      <a class="play" href="unit-4.html">Chơi ngay</a>
+    </article>
+  </main>
+
+  <section class="how" aria-labelledby="how-h">
+    <h2 id="how-h">Cách chơi</h2>
+    <ol class="steps">
+      <li><b>Bước 1</b><span>Nhập tên, bật loa và bấm Bắt đầu. Đồng hồ 30 phút chỉ chạy khi đang trả lời câu hỏi.</span></li>
+      <li><b>Bước 2</b><span>Mỗi level có phần xem nhanh từ vựng, mẫu câu. Trả lời đúng liên tiếp để nhận thêm điểm.</span></li>
+      <li><b>Bước 3</b><span>Cuối bài, đọc báo cáo lỗi sai và kế hoạch học tập, rồi bấm Sao chép báo cáo để gửi cho giáo viên.</span></li>
+    </ol>
+    <p class="note">Nên dùng Chrome, Edge hoặc Safari bản mới. Giọng đọc lấy từ thiết bị đang dùng, nếu máy có giọng Anh-Anh thì trò chơi sẽ dùng giọng đó.</p>
+  </section>
+
+  <footer>Kết quả của học viên được lưu trên chính thiết bị đó và không gửi lên máy chủ.</footer>
+</div>
+</body>
+</html>
